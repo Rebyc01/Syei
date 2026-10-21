@@ -1,0 +1,9 @@
+SYEI QUICK START
+1. Install Node.js 20+ (Node 22+ recommended).
+2. Open a terminal in this folder.
+3. Run: npm install
+4. Copy .env.example to .env
+5. Put your OpenAI API key in OPENAI_API_KEY and set SESSION_SECRET.
+6. Run: npm start
+7. Open http://localhost:3000
+Read README.md for movie catalog configuration, security and deployment notes.

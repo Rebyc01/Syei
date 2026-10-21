@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111117">
+  <title>SYEI — Explore, ask, create</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" data-page="discover"><span class="brand-mark">S</span><span>SYEI</span></a>
+      <div class="side-label">WORKSPACE</div>
+      <nav>
+        <button class="nav-item active" data-page="discover"><span>▦</span> Discover</button>
+        <button class="nav-item" data-page="ai"><span>✳</span> SYEI AI</button>
+        <button class="nav-item" data-page="movies"><span>▶</span> Movies & Kannywood</button>
+        <button class="nav-item" data-page="search"><span>⌕</span> Search & downloads</button>
+        <button class="nav-item" data-page="builder"><span>⌘</span> AI Code Builder</button>
+        <button class="nav-item" data-page="saved"><span>♡</span> Saved items</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="status-card"><span class="status-dot"></span><div><b>Workspace ready</b><small id="status-text">Checking services…</small></div></div>
+        <button id="auth-open" class="account-button">Sign in / Create account</button>
+        <p class="side-foot">Discover responsibly. Respect creators and licences.</p>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">S</span> SYEI</div>
+        <div class="breadcrumbs">Your digital universe <span>/</span> <b id="crumb">Discover</b></div>
+        <div class="top-actions"><span class="pill" id="account-pill">Guest mode</span><button class="avatar" id="avatar">S</button></div>
+      </header>
+      <section class="page active" id="page-discover">
+        <div class="hero">
+          <div class="hero-orb orb-one"></div><div class="hero-orb orb-two"></div>
+          <div class="eyebrow"><span class="spark">✦</span> ONE SPACE. ENDLESS POSSIBILITIES.</div>
+          <h1>Find your next<br><em>big idea.</em></h1>
+          <p>Discover inspiration, explore media, ask smarter questions, and turn ideas into working code.</p>
+          <form id="discover-form" class="hero-search"><span>⌕</span><input id="discover-query" placeholder="Search ideas, design, photography…" value="african architecture"><button>Explore <span>↗</span></button></form>
+          <div class="hero-tags"><span>Trending:</span><button data-search="African design">African design</button><button data-search="minimalist interiors">Minimalist interiors</button><button data-search="nature photography">Nature photography</button></div>
+        </div>
+        <div class="section-heading"><div><div class="eyebrow muted">CURATED FOR YOUR CURIOSITY</div><h2>Explore inspiration</h2></div><span class="small-note">Images from Wikimedia Commons · licence details on source pages</span></div>
+        <div id="discover-grid" class="masonry"><div class="loading">Loading discovery…</div></div>
+      </section>
+      <section class="page" id="page-ai">
+        <div class="page-intro"><div class="eyebrow muted">YOUR THINKING PARTNER</div><h1>Meet <em>SYEI AI.</em></h1><p>Ask questions, work through ideas, and get help with your next move.</p></div>
+        <div class="chat-layout"><div id="chat-log" class="chat-log"><div class="welcome-message"><div class="ai-icon">✳</div><h2>What can we figure out together?</h2><p>Ask a question, plan a project, or explore something new.</p><div class="prompt-chips"><button>Help me plan a small business website</button><button>Explain APIs in simple terms</button><button>Give me 5 creative project ideas</button></div></div></div>
+        <form id="chat-form" class="chat-composer"><textarea id="chat-input" rows="2" placeholder="Message SYEI AI…"></textarea><div class="composer-bottom"><span>AI responses may need verification.</span><button class="primary-button">Send ↗</button></div></form></div>
+      </section>
+      <section class="page" id="page-movies">
+        <div class="page-intro"><div class="eyebrow muted">WATCH WITH PERMISSION</div><h1>Stories worth <em>watching.</em></h1><p>Browse titles from your configured, authorized catalog. Add licensed Kannywood and other films in <code>data/movies.json</code>.</p></div>
+        <div class="filter-row"><input id="movie-query" placeholder="Search movies…"><select id="movie-category"><option value="">All categories</option></select></div>
+        <div id="movies-grid" class="movie-grid"><div class="empty-state">Loading your authorized catalog…</div></div>
+        <p class="disclaimer">SYEI does not bundle pirated movies. Only list or stream titles for which you have permission.</p>
+      </section>
+      <section class="page" id="page-search">
+        <div class="page-intro"><div class="eyebrow muted">SEARCH ACROSS PUBLIC ARCHIVES</div><h1>Search beyond <em>the usual.</em></h1><p>Search public archive metadata, open the original item page, and download direct files where the source allows it.</p></div>
+        <form id="media-form" class="search-panel"><span>⌕</span><input id="media-query" placeholder="Search public domain film, audio, images…"><button class="primary-button">Search</button></form>
+        <div class="provider-row"><span>CONNECTED SOURCES</span><b>Wikimedia Commons</b><b>Internet Archive</b><small>Always check rights before reuse.</small></div>
+        <div id="media-results" class="results-list"></div>
+      </section>
+      <section class="page" id="page-builder">
+        <div class="page-intro"><div class="eyebrow muted">FROM WORDS TO CODE</div><h1>Build your <em>next idea.</em></h1><p>Describe a project and get a structured code draft you can save and run locally.</p></div>
+        <div class="builder-panel"><label for="builder-prompt">WHAT DO YOU WANT TO CREATE?</label><textarea id="builder-prompt" rows="5" placeholder="Build a responsive landing page for a local fashion brand with a product grid, contact form, and dark green theme…"></textarea><div class="builder-controls"><div><label for="builder-stack">STARTING STACK</label><select id="builder-stack"><option value="html">HTML / CSS / JavaScript</option><option value="react">React app</option><option value="node">Node.js server</option></select></div><button id="build-button" class="primary-button">Generate project ✦</button></div><div class="builder-hint">Generated code is not automatically executed. Review it before running.</div></div>
+        <div id="builder-output" class="builder-output hidden"><div class="output-head"><h3>Generated project</h3><button id="copy-code" class="secondary-button">Copy output</button></div><pre><code id="code-output"></code></pre></div>
+      </section>
+      <section class="page" id="page-saved">
+        <div class="page-intro"><div class="eyebrow muted">YOUR PERSONAL COLLECTION</div><h1>Keep what <em>inspires you.</em></h1><p>Sign in to keep a personal collection of ideas and media.</p></div>
+        <div id="saved-grid" class="masonry"><div class="empty-state">Sign in to view saved items.</div></div>
+      </section>
+      <footer class="footer"><span>SYEI © 2026</span><span>Explore responsibly · Built for curiosity</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <dialog id="auth-dialog"><form id="auth-form" method="dialog"><button type="button" class="dialog-close" id="auth-close">×</button><div class="brand"><span class="brand-mark">S</span><span>SYEI</span></div><h2 id="auth-title">Welcome back.</h2><p>Sign in to save your discoveries and use your workspace.</p><label>Email address</label><input id="auth-email" type="email" autocomplete="email" required placeholder="you@example.com"><label>Password</label><input id="auth-password" type="password" minlength="10" autocomplete="current-password" required placeholder="At least 10 characters"><small>New account? Choose Create account below. Passwords are hashed on the server.</small><button class="primary-button full" id="auth-submit">Sign in</button><button type="button" class="link-button" id="auth-switch">Create account instead</button><div id="auth-error" class="form-error"></div></form></dialog>
+  <script src="/app.js" defer></script>
+</body>
+</html>

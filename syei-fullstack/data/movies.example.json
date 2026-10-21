@@ -1,0 +1,14 @@
+[
+  {
+    "id": "sample-kannywood-licensed",
+    "title": "Example Kannywood Film",
+    "category": "Kannywood",
+    "year": 2024,
+    "language": "Hausa",
+    "poster": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600",
+    "description": "Replace this example with a film you are licensed to stream or promote.",
+    "watchUrl": "https://example.com/your-authorized-film",
+    "downloadUrl": "",
+    "rights": "Replace with rights holder / licence reference"
+  }
+]
