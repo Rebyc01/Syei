@@ -1,9 +1,23 @@
-SYEI QUICK START
-1. Install Node.js 20+ (Node 22+ recommended).
+SYEI — CLEAN HOSTING PACKAGE (v1.1.0)
+
+This package is prepared for Node.js 22+ and Railway hosting.
+
+LOCAL TEST
+1. Install Node.js 22 LTS or newer.
 2. Open a terminal in this folder.
 3. Run: npm install
-4. Copy .env.example to .env
-5. Put your OpenAI API key in OPENAI_API_KEY and set SESSION_SECRET.
+4. Copy .env.example to .env and set a strong SESSION_SECRET.
+5. Add OPENAI_API_KEY only if you want the AI features.
 6. Run: npm start
 7. Open http://localhost:3000
-Read README.md for movie catalog configuration, security and deployment notes.
+
+RAILWAY HOSTING
+1. Push these files to your GitHub repository (the contents of this folder, not the ZIP).
+2. In Railway, create a project from the GitHub repository.
+3. Set Node version to 22 if the platform asks; .nvmrc and package.json already request it.
+4. Add environment variables: NODE_ENV=production, COOKIE_SECURE=true, SESSION_SECRET=<strong random 32+ character secret>.
+5. Optionally add OPENAI_API_KEY and OPENAI_MODEL for AI features. Never commit .env or API keys.
+6. Generate a public domain in Railway's networking/settings.
+7. For durable accounts and sessions, attach a persistent volume mounted at /app/syei-fullstack/data only if the repository root is above this folder; otherwise mount at the app's data folder. Confirm the runtime path before configuring persistence.
+
+See README.md for feature and safety notes.

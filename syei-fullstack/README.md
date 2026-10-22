@@ -1,4 +1,4 @@
-# SYEI — Full-stack local-first website
+# SYEI — Full-stack website (clean hosting package v1.1.0)
 
 SYEI combines visual discovery, an AI chat assistant, an authorized movie catalog (including Kannywood categories), public-archive search, and an AI code builder in one Node.js application.
 
@@ -14,7 +14,7 @@ SYEI combines visual discovery, an AI chat assistant, an authorized movie catalo
 
 ## Requirements
 
-- Node.js 20 or newer
+- Node.js 22 LTS or newer
 - npm
 - An OpenAI API key for live AI features (usage is billed separately by OpenAI)
 - Internet connection for Wikimedia Commons and Internet Archive searches
@@ -50,7 +50,7 @@ SYEI combines visual discovery, an AI chat assistant, an authorized movie catalo
 
 7. Visit `http://localhost:3000`. Register an account to use AI and personal saved items.
 
-Use a current Node.js 22+ release for the built-in `node:sqlite` database. A small JSON fallback is included for accounts/saves, but SQLite is recommended.
+Use Node.js 22 LTS or newer. The built-in `node:sqlite` module is used when available; a small JSON fallback is included for accounts/saves.
 
 ## Movie catalog schema
 
@@ -72,6 +72,19 @@ Use a current Node.js 22+ release for the built-in `node:sqlite` database. A sma
 ```
 
 Only publish content you own or are licensed to stream/promote. The sample movie is a placeholder and will not play.
+
+## Deploy to Railway (instead of Render)
+
+This repository includes `railway.json` and `.nvmrc` for a Node.js 22 deployment.
+
+1. Push the contents of this folder to the root of your GitHub repository.
+2. In Railway, create a new project and choose deployment from your GitHub repository.
+3. Confirm the start command is `npm start`. The project file already specifies it.
+4. Add variables in Railway: `NODE_ENV=production`, `COOKIE_SECURE=true`, and `SESSION_SECRET` (a random secret at least 32 characters long). Add `OPENAI_API_KEY` and `OPENAI_MODEL` only if you want AI features.
+5. Generate a public domain in Railway's networking settings.
+6. For persistent accounts, saves, and sessions across redeploys, configure a persistent volume at the actual runtime `data` directory. Without persistent storage, local SQLite/session files may be lost on redeploy or restart.
+
+Do not commit `.env`, API keys, database files, or movie catalogues containing content you do not have permission to distribute.
 
 ## External services and accounts
 

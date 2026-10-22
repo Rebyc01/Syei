@@ -1,14 +1,16 @@
 {
   "name": "syei-fullstack",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
-  "description": "SYEI full-stack discovery, AI assistant, licensed media search, and AI code builder",
+  "description": "SYEI full-stack website prepared for Node.js 22+ hosting",
   "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js"
   },
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "connect-sqlite3": "^0.9.15",

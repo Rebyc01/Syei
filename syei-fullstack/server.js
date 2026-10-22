@@ -17,7 +17,13 @@ const app = express();
 const PORT = Number(process.env.PORT || 3000);
 const isProduction = process.env.NODE_ENV === 'production';
 const sessionSecret = process.env.SESSION_SECRET || '';
+const dataDir = path.resolve(__dirname, process.env.DATA_DIR || 'data');
+fs.mkdirSync(dataDir, { recursive: true });
 const SQLiteStore = SQLiteStoreFactory(session);
+if (isProduction && sessionSecret.length < 32) {
+  console.error('SESSION_SECRET must be set to a random value of at least 32 characters in production.');
+  process.exit(1);
+}
 
 if (sessionSecret.length < 32) {
   console.warn('WARNING: SESSION_SECRET should be at least 32 random characters. Set it in .env before real use.');
@@ -47,7 +53,7 @@ app.use(helmet({
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: false, limit: '32kb' }));
 app.use(session({
-  store: new SQLiteStore({ db: 'sessions.sqlite', dir: path.join(__dirname, 'data') }),
+  store: new SQLiteStore({ db: 'sessions.sqlite', dir: dataDir }),
   name: 'syei.sid',
   secret: sessionSecret || crypto.randomBytes(32).toString('hex'),
   resave: false,
@@ -61,8 +67,6 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 
-const dataDir = path.join(__dirname, 'data');
-fs.mkdirSync(dataDir, { recursive: true });
 const dbPath = path.join(dataDir, 'syei.sqlite');
 const sqliteModule = await import('node:sqlite').catch(() => null);
 const Database = sqliteModule?.DatabaseSync || null;
